@@ -81,3 +81,20 @@ void CircleNetwork() {
         }
     }
 }
+void sparks(){
+  
+  for (Spark spark : sparks) {
+    spark.update();
+    spark.display();
+  }
+  if(mousePressed){
+    if(mouseFlag==false){
+    sparks.add(new Spark());
+    }
+    mouseFlag=true;
+  }
+  if(!mousePressed){
+    mouseFlag=false;
+  }
+  
+}

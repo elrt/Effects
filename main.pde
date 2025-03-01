@@ -1,5 +1,6 @@
 import processing.sound.*;
-
+import processing.opengl.*;
+import android.content.Context;
 SoundFile sound;
 SoundFile click;
 Button menu;
@@ -8,6 +9,9 @@ Button back;
 Button fireworkEffect;
 Button devs;
 Button circNetw;
+Button spark;
+ArrayList<Spark> sparks;
+
 PFont mfont;
 PImage Plogo;
 float angle = 0;
@@ -15,6 +19,7 @@ int maxRings = 20;
 ArrayList<Ring> rings = new ArrayList<Ring>();
 boolean mousePressedFlag = false;
 boolean mouseReleasedFlag = true;
+boolean mouseFlag = false;
 int numCircles = 50;
 float maxDistance = 200;
 Circle[] circles = new Circle[numCircles];
@@ -22,20 +27,24 @@ Circle[] circles = new Circle[numCircles];
 ArrayList<Firework> fireworks;
 int scenes=0; //0menu1effectlist2,3...effects
 void setup() {
-  size(displayWidth, displayHeight, P2D);
+  size(displayWidth, displayHeight, OPENGL);
   menu = new Button(width/2, height/2, width/2, height/20, 0, 0);
   devs = new Button(width/2, height/1.7, width/2, height/20, 0, 0);
   waveEffect = new Button(width/3, height/10, width/2.5, height/20, 200, 150);
   fireworkEffect = new Button(width/3, height/6, width/2.2, height/20, 200, 150);
   circNetw= new Button(width/3, height/4.3, width/2.2, height/20, 200, 150);
+  spark = new Button(width/3, height/3.3, width/2.6, height/20, 200, 150);
   back = new Button(width/4, height/1.11, width/3, height/20, 200, 150);
   sound = new SoundFile(this, "muzik.wav");
   click = new SoundFile(this, "click.wav");
   Plogo = loadImage("Plogo.png");
   mfont = createFont("KiwiSoda.ttf", 50);
   textFont(mfont);
+  sparks = new ArrayList<Spark>();
   fireworks = new ArrayList<Firework>();
   sound.loop();
+ 
+  strokeCap(ROUND);
   for (int i = 0; i < numCircles; i++) {
     circles[i] = new Circle(random(width), random(height));
   }
@@ -83,7 +92,7 @@ void draw() {
     fill(255);
     text("Back", width/4, height/1.1);
     textSize(60);
-    text("Main developer : elliktronic \n Music by : example \n", width/2, height/2);
+    text("Main developer : elliktronic \n Music by : (downloaded on random site) \n Spark effect: by CalsignLabs", width/2, height/2);
     image(Plogo, width/1.5, height/1.2, width/5, height/10);
     if (back.IsPressed()) {
       scenes=0;
@@ -91,5 +100,8 @@ void draw() {
   }
   if (scenes==5) {
     CircleNetworkEff();
+  }
+  if (scenes==6) {
+    SparksEff();
   }
 }

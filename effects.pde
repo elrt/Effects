@@ -88,7 +88,10 @@ void sparks(){
     spark.display();
   }
   if(mousePressed){
-    if(mouseFlag==false){
+    if(mouseFlag==false){ 
+      if(vibrate==false){
+     ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
+     }
     sparks.add(new Spark());
     }
     mouseFlag=true;

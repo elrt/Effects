@@ -22,9 +22,9 @@ class Button{
     else{
       fill(0,255);
     }
-    stroke(#673A6E);
+    stroke(#292271);
     strokeWeight(12);
-    rect(btnX - btnWidth/2, btnY - btnHeight/2, btnWidth, btnHeight,255);
+    rect(btnX - btnWidth/2, btnY - btnHeight/2, btnWidth, btnHeight,25);
   }
   
   public boolean IsPressed(){

@@ -35,14 +35,16 @@ void CircleNetworkEff(){
   }
 }
 void SparksEff(){
-  sparks();
   
   textSize(70);
   textAlign(CENTER);
   back.Display();
+  
   fill(255);
   text("Back",width/4,height/1.1);
   if(back.IsPressed()){
+    mouseFlag=true;
     scenes=1;
   }
+  sparks();
 }
